@@ -2,9 +2,8 @@ import variables from "./page.module.scss";
 import Image from "next/image";
 
 import { Octokit } from "octokit";
-import { useEffect, useState } from "react";
 
-const TOKEN = "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";
+const TOKEN = process.env.GH_TOKEN;
 const USERNAME = "iagpomponet";
 const REPO_NAME = "blog";
 
