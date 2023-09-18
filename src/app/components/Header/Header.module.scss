@@ -7,6 +7,16 @@
     max-width: var(--container);
     width: 100%;
     padding: 1rem;
+
+    a {
+        color: unset;
+        text-decoration: none;
+        transition: .4s;
+
+        &:hover {
+            opacity: .8;
+        }
+    }
 }
 
 .nav {
@@ -17,4 +27,14 @@
 
 
     cursor: pointer;
+}
+
+
+.homeLink {
+    cursor: pointer;
+    transition: .4s;
+
+    &:hover {
+        opacity: .8;
+    }
 }

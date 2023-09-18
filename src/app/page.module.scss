@@ -23,6 +23,10 @@
     display: flex;
     flex-direction: column;
     text-align: center;
+
+    p {
+        margin: 0;
+    }
 }
 
 .postItem {
@@ -31,8 +35,12 @@
     justify-content: space-between;
     padding: 1rem;
 
-    border-top: 1px solid;
-    border-bottom: 1px solid;
+    transition: 0.4s;
+    cursor: pointer;
+
+    &:hover {
+        opacity: .8;
+    }
 }
 
 .light {

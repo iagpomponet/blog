@@ -25,15 +25,6 @@ const fetchIssues = async () => {
 
 export default async function Home() {
   const data = await fetchIssues();
-  // const [data, setData] = useState();
-
-  // useEffect(() => {
-  //   const handleInitialFetch = async () => {
-  //     await fetchIssues();
-  //   };
-
-  //   handleInitialFetch().then((res) => setData(res));
-  // });
 
   return (
     <main>
@@ -49,18 +40,24 @@ export default async function Home() {
           <div className={variables.bio}>
             <h1>Iago Pomponet</h1>
             <p>
-              A fast, minimalistic Hugo theme with light and dark mode support,
-              for running a personal site or blog.
+              Frontend engineer from Brazil with 4 years of experience.
+              Currently working at Uber
             </p>
           </div>
         </section>
 
         <ul>
-          {(data as any)?.data?.map((post: any) => {
+          {data?.data?.map((post) => {
             return (
               <li key={post.id} className={variables.postItem}>
                 <div>{post.title}</div>
-                <div>{new Date(post.created_at).getUTCDate()}</div>
+                <div>
+                  {new Date(post.created_at).toLocaleDateString("en-US", {
+                    year: "numeric",
+                    month: "long",
+                    day: "numeric",
+                  })}
+                </div>
               </li>
             );
           })}
