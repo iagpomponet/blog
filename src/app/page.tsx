@@ -1,95 +1,72 @@
-import Image from 'next/image'
-import styles from './page.module.css'
+import variables from "./page.module.scss";
+import Image from "next/image";
 
-export default function Home() {
+import { Octokit } from "octokit";
+import { useEffect, useState } from "react";
+
+const TOKEN = "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";
+const USERNAME = "iagpomponet";
+const REPO_NAME = "blog";
+
+const octokit = new Octokit({
+  auth: TOKEN,
+});
+
+const fetchIssues = async () => {
+  const res = await octokit.request("GET /repos/{owner}/{repo}/issues", {
+    owner: USERNAME,
+    repo: REPO_NAME,
+    headers: {
+      "X-GitHub-Api-Version": "2022-11-28",
+    },
+  });
+
+  return res;
+};
+
+export default async function Home() {
+  const data = await fetchIssues();
+  // const [data, setData] = useState();
+
+  // useEffect(() => {
+  //   const handleInitialFetch = async () => {
+  //     await fetchIssues();
+  //   };
+
+  //   handleInitialFetch().then((res) => setData(res));
+  // });
+
   return (
-    <main className={styles.main}>
-      <div className={styles.description}>
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>src/app/page.tsx</code>
-        </p>
-        <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{' '}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
-        </div>
-      </div>
+    <main>
+      <div className={variables.container}>
+        <section className={variables.bioSection}>
+          <Image
+            className={variables.avatar}
+            alt="Iago picture"
+            width={70}
+            height={70}
+            src="/avatar.jpg"
+          />
+          <div className={variables.bio}>
+            <h1>Iago Pomponet</h1>
+            <p>
+              A fast, minimalistic Hugo theme with light and dark mode support,
+              for running a personal site or blog.
+            </p>
+          </div>
+        </section>
 
-      <div className={styles.center}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
-
-      <div className={styles.grid}>
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Docs <span>-&gt;</span>
-          </h2>
-          <p>Find in-depth information about Next.js features and API.</p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Learn <span>-&gt;</span>
-          </h2>
-          <p>Learn about Next.js in an interactive course with&nbsp;quizzes!</p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p>Explore the Next.js 13 playground.</p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Deploy <span>-&gt;</span>
-          </h2>
-          <p>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
+        <ul>
+          {(data as any)?.data?.map((post: any) => {
+            return (
+              <li key={post.id} className={variables.postItem}>
+                <div>{post.title}</div>
+                <div>{new Date(post.created_at).getUTCDate()}</div>
+              </li>
+            );
+          })}
+        </ul>
       </div>
     </main>
-  )
+  );
 }

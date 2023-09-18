@@ -1,0 +1,38 @@
+:root {
+    --container: 56rem;
+
+    --blog-gray: rgb(186, 189, 196);
+    --blog-black: rgb(19, 20, 24);
+    --blog-white: white;
+}
+
+
+* {
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+html {
+    width: 100%;
+}
+
+body {
+    color: white;
+    margin: 0;
+    width: 100%;
+}
+
+ul {
+    list-style: none;
+    padding: 0;
+}
+
+.dark {
+    background-color: var(--blog-black);
+    color: var(--blog-white);
+}
+
+.light {
+    background-color: var(--blog-white);
+    color: var(--blog-black);
+}
