@@ -46,22 +46,25 @@ export default async function Home() {
           </div>
         </section>
 
-        <ul className={variables.postList}>
-          {data?.data?.map((post) => {
-            return (
-              <li key={post.id} className={variables.postItem}>
-                <div>{post.title}</div>
-                <div>
-                  {new Date(post.created_at).toLocaleDateString("en-US", {
-                    year: "numeric",
-                    month: "long",
-                    day: "numeric",
-                  })}
-                </div>
-              </li>
-            );
-          })}
-        </ul>
+        <section>
+          <ul className={variables.postList}>
+            <h3>Recent posts</h3>
+            {data?.data?.map((post) => {
+              return (
+                <li key={post.id} className={variables.postItem}>
+                  <div>{post.title}</div>
+                  <div>
+                    {new Date(post.created_at).toLocaleDateString("en-US", {
+                      year: "numeric",
+                      month: "long",
+                      day: "numeric",
+                    })}
+                  </div>
+                </li>
+              );
+            })}
+          </ul>
+        </section>
       </div>
     </main>
   );
