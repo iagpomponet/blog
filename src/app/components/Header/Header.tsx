@@ -8,9 +8,9 @@ export default function Header() {
 
   return (
     <header className={variables.header}>
-      <div className={variables.homeLink}>
+      <Link href="/" className={variables.homeLink}>
         <HomeSimpleDoor />
-      </div>
+      </Link>
       <div>
         <nav className={variables.nav}>
           <Link href="/">Home</Link>

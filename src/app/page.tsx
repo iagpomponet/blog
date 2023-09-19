@@ -46,7 +46,7 @@ export default async function Home() {
           </div>
         </section>
 
-        <ul>
+        <ul className={variables.postList}>
           {data?.data?.map((post) => {
             return (
               <li key={post.id} className={variables.postItem}>
